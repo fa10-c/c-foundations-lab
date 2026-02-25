@@ -2,7 +2,7 @@
 
 A small, evolving lab dedicated to strengthening core C programming fundamentals through simple, focused exercises.
 
-This repository is intentionally minimal. The goal is not complexity, but clarity — building solid mental models, clean reasoning, and confidence through consistent practice.
+This repository is intentionally minimal. The goal is not complexity, but clarity, building solid mental models, clean reasoning, and confidence through consistent practice.
 
 ---
 
@@ -44,7 +44,7 @@ More modules will be added over time as the lab evolves.
 
 Strong foundations make everything else easier.
 
-This lab is a space to practice deliberately, refine fundamentals, and build deeper understanding step by step — without rush, without noise.
+This lab is a space to practice deliberately, refine fundamentals, and build deeper understanding step by step, without rush, without noise.
 
 ---
 
