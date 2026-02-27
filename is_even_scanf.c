@@ -36,16 +36,15 @@ int main()
     int usr_val;
 
     scanf_ret = scanf("%d", &usr_val);
-    if (usr_val == 0)
-        printf ("ZERO\n");
+
+    if (scanf_ret != 1)
+        printf("invalid input\n");
     else
     {
-        int e = is_even(usr_val);
-        if (e == 0)
-            printf("the number is %d and it's EVEN\n", usr_val);
+        int t = is_even(usr_val);
+        if (t == 0)
+            printf("the number is %d and iet's even\n", usr_val);
         else
-            printf("the number is %d and it's ODD\n", usr_val);
-
+            printf("the number is %d and it's odd!\n", usr_val);
     }
-    return 0;
 }
