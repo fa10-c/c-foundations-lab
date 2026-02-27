@@ -21,21 +21,21 @@ int main (void)
     int a = 21;
     int b = 50;
 
-    printf("max of %d and %d is %d\n", a, b, max(a, b));
+    printf("MAX of %d and %d is %d\n", a, b, MAX(a, b));
 
     float c = -11.5f;
     float d = 442.7f;
 
-    printf("max of %f and %f is %f\n", c, d, max(c, d));
+    printf("MAX of %f and %f is %f\n", c, d, MAX(c, d));
 
 
     char e = 'e';
     char f = 'f';
 
-    printf("max of %c and %c is %c\n", e, f, max(e, f));
+    printf("MAX of %c and %c is %c\n", e, f, MAX(e, f));
 
     char* j = "hi";
     char* k = "bye";
 
-    printf ("max of %s and %s is %s\n", j, k, max(j, k));
+    printf ("MAX of %s and %s is %s\n", j, k, MAX(j, k));
 }
