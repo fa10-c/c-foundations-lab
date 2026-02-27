@@ -1,4 +1,4 @@
-# C Foundations — Rebuild Lab 🛠️
+# C Foundations Lab 🛠️
 
 A small, evolving lab dedicated to strengthening core C programming fundamentals through simple, focused exercises.
 
