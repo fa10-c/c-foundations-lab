@@ -1,0 +1,80 @@
+🔧 What are “parametric macros”?
+
+They’re also called function-like macros.
+They look like functions:
+
+#define max(x, y) ...
+
+but they are NOT functions. They are text substitution performed by the preprocessor before compilation.
+So when you write:
+max(a, b)
+the preprocessor rewrites your code into:
+(((a)>=(b)) ? (a) : (b))
+No function call happens. No type checking like a real function. It’s just expansion.
+
+✅ Why people use them
+
+Parametric macros are used for:
+
+1) Generic behavior (works for many types)
+int, float, char — without writing multiple functions.
+
+2) Zero function-call overhead (mostly irrelevant today, but historically important)
+Because it expands inline.
+
+3) Convenience + readability (when used carefully)
+Sometimes they keep code short and expressive.
+
+🧠 The BIG rules:
+✅ Rule 1: Parenthesize parameters
+
+Bad:
+
+#define max(x,y) x>y?x:y
+
+Good:
+
+#define max(x, y) (((x)>=(y)) ? (x) : (y))
+
+Why? Because expressions like max(a+1, b+1) must expand safely.
+
+⚠️ Limitations & gotchas (important)
+⚠️ 1) Arguments can be evaluated multiple times
+
+This is the #1 macro trap.
+Example:
+max(i++, j++)
+expands into something like:
+(((i++) >= (j++)) ? (i++) : (j++))
+So i++ might happen twice. That’s a bug factory.
+✅ Guideline: Never pass expressions with side effects to such macros (++, --, function calls that change state).
+
+⚠️ 2) No type safety
+
+C won’t protect you like with functions.
+Example:
+comparing pointers with >= can be meaningless unless they are in the same array/object.
+Which leads directly to the last test in parametric_macros.c:
+char* j = "hi"; char* k = "bye"; max(j, k)
+This compares addresses, not which string is “bigger” alphabetically.
+So the result is basically:
+whichever string literal happens to live at a higher memory address
+That’s not “max string”. That’s “max pointer value”.
+
+✅ If you want max string lexicographically, you use strcmp and logic, not >=.
+⚠️ 3) Operator requirements
+Your macro requires >= to make sense for the type.
+ints/floats/chars: OK
+pointers: questionable
+structs: won’t compile (no >=)
+
+⚠️ 4) Debugging can be confusing
+When you step through code, you don’t “enter” the macro like a function. It’s expanded code.
+Tip: compile with -E to see preprocessed output.
+
+✅ How to explain it in one sentence
+
+A parametric macro is:
+A function-like preprocessor substitution that expands into code, 
+often used to implement simple generic operations, 
+but it has no type checking and can evaluate arguments multiple times.
