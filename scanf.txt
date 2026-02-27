@@ -1,0 +1,115 @@
+🧩 What is scanf?
+
+scanf = scan formatted input
+It reads data from standard input (keyboard) and stores it into variables according to a format you specify.
+If printf is:
+“print formatted output”
+Then scanf is:
+“read formatted input”
+Both live in the same library: #include <stdio.h>
+
+🧠 Basic Idea
+
+The simplest form:
+scanf("format", &variable);
+example:
+
+int n;
+scanf("%d", &n);
+
+What this means:
+%d → expect an integer
+&n → give scanf the address of n so it can store the value there
+
+Important:
+scanf needs the address of the variable, not the variable itself.
+That’s why we use &.
+
+🔢 Common Format Specifiers:
+| Specifier | Meaning             |
+| --------- | ------------------- |
+| `%d`      | int                 |
+| `%ld`     | long                |
+| `%f`      | float               |
+| `%lf`     | double              |
+| `%c`      | char                |
+| `%s`      | string (char array) |
+
+
+🧠 What Does scanf Return?
+
+scanf returns the number of successfully assigned inputs.
+Example:
+
+int n;
+int result = scanf("%d", &n);
+If:
+User types 42 → return value = 1
+User types abc → return value = 0
+Input stream ends (Ctrl+D) → return value = EOF (-1)
+So proper validation looks like:
+if (scanf("%d", &n) != 1)
+This means:
+“If I did not successfully read one integer, something is wrong.”
+
+⚠️ Important Limitation #1 — Buffer Issues
+
+If user types:
+abc
+scanf("%d", &n):
+fails
+returns 0
+
+BUT leaves "abc" in the input buffer
+If you try to scanf again without clearing the buffer, you may get stuck.
+That’s why in more advanced programs people use:
+fgets + strtol
+instead of raw scanf.
+But for beginner exercises, using scanf once and exiting is fine.
+
+⚠️ Limitation #2 — Weak Validation
+
+If user types:
+12abc
+scanf("%d", &n) will:
+read 12
+stop at a
+return 1
+So it partially accepts invalid input.
+It doesn’t ensure the whole line is clean.
+
+⚠️ Limitation #3 — Dangerous with Strings
+
+If you do:
+char s[10];
+scanf("%s", s);
+And the user types a 100-character string → buffer overflow.
+You must limit input width like:
+scanf("%9s", s);
+
+
+🎯 When is scanf good?
+
+Small console programs
+Learning input basics
+Quick interactive tools
+Competitive programming
+Controlled environments
+
+🚫 When is it not ideal?
+
+Secure applications
+Robust CLI tools
+Programs needing strict validation
+Handling arbitrary user input safely
+For those, fgets + strtol is better.
+
+🧠 Mental Model Summary
+
+scanf:
+
+Reads text from keyboard
+Matches it against your format string
+Converts it into a typed value
+Stores it in the variable you passed by address
+Returns how many conversions succeeded
